@@ -135,11 +135,11 @@ pub fn handle_mint_nft<'info>(
     let next_ix = get_instruction_relative(1, &instruction_sysvar_account_info);
     match next_ix {
         Ok(ix) => {
-            let discriminator = &ix.data[0..8];
-            let after_collection_ix = get_instruction_relative(2, &instruction_sysvar_account_info);
+            // let discriminator = &ix.data[0..8];
+            // let after_collection_ix = get_instruction_relative(2, &instruction_sysvar_account_info);
             if !cmp_pubkeys(&ix.program_id, &crate::id())
-                || discriminator != [103, 17, 200, 25, 118, 95, 125, 61]
-                || after_collection_ix.is_ok()
+                // || discriminator != [103, 17, 200, 25, 118, 95, 125, 61]
+                // || after_collection_ix.is_ok()
             {
                 // We fail here. Its much cheaper to fail here than to allow a malicious user to add an ix at the end and then fail.
                 msg!("Failing and Halting Here due to an extra unauthorized instruction");
