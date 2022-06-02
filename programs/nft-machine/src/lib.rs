@@ -9,7 +9,7 @@ pub use errors::CandyError;
 pub use processor::*;
 pub use state::*;
 pub use utils::*;
-declare_id!("6J7avjMHMQMDz8JVERqSxXseChTCKjrfiPh6KFTqJxdN");
+declare_id!("5vawzfHUTNtBzzM5r2MTa5T8E3LHDqbAAkQeWrCX6YZJ");
 
 #[program]
 pub mod nft_machine {
