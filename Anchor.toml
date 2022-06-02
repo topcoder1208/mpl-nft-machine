@@ -1,7 +1,7 @@
 [programs.localnet]
 mpl_nft_machine = "6J7avjMHMQMDz8JVERqSxXseChTCKjrfiPh6KFTqJxdN"
 [programs.devnet]
-mpl_nft_machine = "6J7avjMHMQMDz8JVERqSxXseChTCKjrfiPh6KFTqJxdN"
+mpl_nft_machine = "5vawzfHUTNtBzzM5r2MTa5T8E3LHDqbAAkQeWrCX6YZJ"
 
 [registry]
 url = "https://anchor.projectserum.com"
