@@ -132,35 +132,35 @@ pub fn handle_mint_nft<'info>(
         )?;
         return Ok(());
     }
-    let next_ix = get_instruction_relative(1, &instruction_sysvar_account_info);
-    match next_ix {
-        Ok(ix) => {
-            msg!("Program ID1: {:?}", crate::id());
-            msg!("Program ID2: {:?}", ix.program_id);
-            // let discriminator = &ix.data[0..8];
-            // let after_collection_ix = get_instruction_relative(2, &instruction_sysvar_account_info);
-            if !cmp_pubkeys(&ix.program_id, &crate::id())
-                // || discriminator != [103, 17, 200, 25, 118, 95, 125, 61]
-                // || after_collection_ix.is_ok()
-            {
-                // We fail here. Its much cheaper to fail here than to allow a malicious user to add an ix at the end and then fail.
-                msg!("Failing and Halting Here due to an extra unauthorized instruction");
-                return err!(CandyError::SuspiciousTransaction);
-            }
-        }
-        Err(_) => {
-            if is_feature_active(&candy_machine.data.uuid, COLLECTIONS_FEATURE_INDEX) {
-                punish_bots(
-                    CandyError::MissingSetCollectionDuringMint,
-                    payer.to_account_info(),
-                    ctx.accounts.candy_machine.to_account_info(),
-                    ctx.accounts.system_program.to_account_info(),
-                    BOT_FEE,
-                )?;
-                return Ok(());
-            }
-        }
-    }
+    // let next_ix = get_instruction_relative(1, &instruction_sysvar_account_info);
+    // match next_ix {
+    //     Ok(ix) => {
+    //         msg!("Program ID1: {:?}", crate::id());
+    //         msg!("Program ID2: {:?}", ix.program_id);
+    //         // let discriminator = &ix.data[0..8];
+    //         // let after_collection_ix = get_instruction_relative(2, &instruction_sysvar_account_info);
+    //         if !cmp_pubkeys(&ix.program_id, &crate::id())
+    //             // || discriminator != [103, 17, 200, 25, 118, 95, 125, 61]
+    //             // || after_collection_ix.is_ok()
+    //         {
+    //             // We fail here. Its much cheaper to fail here than to allow a malicious user to add an ix at the end and then fail.
+    //             msg!("Failing and Halting Here due to an extra unauthorized instruction");
+    //             return err!(CandyError::SuspiciousTransaction);
+    //         }
+    //     }
+    //     Err(_) => {
+    //         if is_feature_active(&candy_machine.data.uuid, COLLECTIONS_FEATURE_INDEX) {
+    //             punish_bots(
+    //                 CandyError::MissingSetCollectionDuringMint,
+    //                 payer.to_account_info(),
+    //                 ctx.accounts.candy_machine.to_account_info(),
+    //                 ctx.accounts.system_program.to_account_info(),
+    //                 BOT_FEE,
+    //             )?;
+    //             return Ok(());
+    //         }
+    //     }
+    // }
     let mut idx = 0;
     let num_instructions =
         read_u16(&mut idx, &instruction_sysvar).map_err(|_| ProgramError::InvalidAccountData)?;
