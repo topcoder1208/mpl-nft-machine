@@ -135,6 +135,8 @@ pub fn handle_mint_nft<'info>(
     let next_ix = get_instruction_relative(1, &instruction_sysvar_account_info);
     match next_ix {
         Ok(ix) => {
+            msg!("Program ID1: {:?}", crate::id());
+            msg!("Program ID2: {:?}", ix.program_id);
             // let discriminator = &ix.data[0..8];
             // let after_collection_ix = get_instruction_relative(2, &instruction_sysvar_account_info);
             if !cmp_pubkeys(&ix.program_id, &crate::id())
